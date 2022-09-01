@@ -15,11 +15,10 @@ var counter = 0;
 var limit = 2;
 
 function newConnection(socket) {
-  console.log("newConnection")
   var id = counter;
   socket.emit('getID', id);
   counter++;
-  console.log('new connection: ' + socket.id);
+  console.log('Client connected: ' + socket.id);
 
   socket.on('mouse', mouseMsg);
 
@@ -42,4 +41,5 @@ function newConnection(socket) {
     // console.log(data);
   }
 
+  socket.on('disconnect', () => console.log('Client disconnected: ' + socket.id));
 }
