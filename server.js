@@ -41,5 +41,8 @@ function newConnection(socket) {
     // console.log(data);
   }
 
-  socket.on('disconnect', () => console.log('Client disconnected: ' + socket.id));
+  socket.on('disconnect', () => {
+    counter--;
+    console.log('Client disconnected: ' + socket.id)
+  });
 }
