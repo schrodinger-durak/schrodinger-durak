@@ -14,6 +14,7 @@ var counter = 0;
 var limit = 2;
 
 function newConnection(socket) {
+  console.log("newConnection")
   var id = counter;
   socket.emit('getID', id);
   counter++;
