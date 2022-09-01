@@ -2,6 +2,7 @@ var express = require('express');
 
 var app = express();
 var server = app.listen(process.env.PORT || 8888);
+console.log(process.env.PORT || 8888)
 
 app.use(express.static('public'));
 
