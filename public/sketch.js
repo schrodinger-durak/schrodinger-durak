@@ -144,7 +144,7 @@ function checkWin() {
     for (place of win) {
       if (!xs.includes(place)) {
         maybe = false;
-        console.log("X: " + place);
+        // console.log("X: " + place);
       }
     }
     if (maybe) {
@@ -152,7 +152,7 @@ function checkWin() {
       for (place of win) {
         if (!os.includes(place)) {
           maybe = false;
-          console.log("O: " + place);
+          // console.log("O: " + place);
         }
       }
       if (maybe) {
