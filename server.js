@@ -1,18 +1,45 @@
-const express = require('express');
-const socketIO = require('socket.io');
+var express = require('express');
 
-const PORT = process.env.PORT || 8888;
-const INDEX = '/index.html';
+var app = express();
+var server = app.listen(process.env.PORT || 8888);
+console.log(process.env.PORT || 8888)
 
-const server = express()
-  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
-  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+app.use(express.static('public'));
 
-const io = socketIO(server);
+var socket = require('socket.io');
 
-io.on('connection', (socket) => {
-  console.log('Client connected');
-  socket.on('disconnect', () => console.log('Client disconnected'));
-});
+var io = socket(server);
 
-setInterval(() => io.emit('time', new Date().toTimeString()), 1000);
+io.sockets.on('connection', newConnection);
+var counter = 0;
+var limit = 2;
+
+function newConnection(socket) {
+  console.log("newConnection")
+  var id = counter;
+  socket.emit('getID', id);
+  counter++;
+  console.log('new connection: ' + socket.id);
+
+  socket.on('mouse', mouseMsg);
+
+  function mouseMsg(data) {
+
+    socket.broadcast.emit('mouse', data);
+    // console.log(data);
+  }
+
+  socket.on('turn', turnMsg);
+
+  function turnMsg(data) {
+    socket.broadcast.emit('turn',0);
+  }
+
+  socket.on('addMove', moveMsg);
+
+  function moveMsg(data) {
+    io.sockets.emit('addMove',data);
+    // console.log(data);
+  }
+
+}
