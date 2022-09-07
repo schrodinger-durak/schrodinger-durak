@@ -24,6 +24,7 @@ var wins = [
   [4, 5, 6],
   [7, 8, 9]
 ];
+var clientsocket;
 
 function setup() {
 
@@ -73,7 +74,7 @@ function setID(data) {
 }
 
 function setIP(data) {
-  console.log("IP:",data);
+  clientsocket = data
 }
 
 function trackOpp(data) {

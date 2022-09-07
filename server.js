@@ -23,7 +23,9 @@ function newConnection(socket) {
   // console.log(Object.keys(socket.client));
   const address = socket.request.connection.remoteAddress;
   console.log('New connection from ' + address);
-  socket.emit('getIP', socket.request.connection.remoteAddress);
+  socket.emit('getIP', socket.handshake);
+  // console.log(socket.handshake.headers)
+  // console.log(Object.keys(socket.request.connection._peername))
 
   socket.on('mouse', mouseMsg);
 
