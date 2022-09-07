@@ -31,6 +31,7 @@ function setup() {
   socket = io()
   background(51);
   socket.on('getID', setID);
+  socket.on('getIP', setIP)
   boxW = (width - edge * 2) / 3;
   boxH = (width - edge * 2) / 3;
   // bye = new O(3);
@@ -69,6 +70,10 @@ function setID(data) {
     txt = "Observer"
   }
   hi = new Play(9, type);
+}
+
+function setIP(data) {
+  console.log("IP:",data);
 }
 
 function trackOpp(data) {

@@ -18,7 +18,12 @@ function newConnection(socket) {
   var id = counter;
   socket.emit('getID', id);
   counter++;
+  // console.log(Object.keys(socket))
   console.log('Client connected: ' + socket.id);
+  // console.log(Object.keys(socket.client));
+  const address = socket.request.connection.remoteAddress;
+  console.log('New connection from ' + address);
+  socket.emit('getIP', socket.request.connection.remoteAddress);
 
   socket.on('mouse', mouseMsg);
 
